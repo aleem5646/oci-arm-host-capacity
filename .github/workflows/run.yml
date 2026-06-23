@@ -1,15 +1,7 @@
-*(We are just going to name it `run.yml` to completely bypass GitHub's folder naming bug. GitHub Actions will pick it up instantly regardless!)*
-
-### Step 3: Paste the corrected code
-Copy and paste this slightly cleaned-up code block into the large text box below:
-
-```yaml
 name: OCI Arm Host Capacity
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/5 * * * *'
 
 jobs:
   run-script:
@@ -41,3 +33,5 @@ jobs:
           OCI_OCPUS: ${{ vars.OCI_OCPUS }}
           OCI_MEMORY_IN_GBS: ${{ vars.OCI_MEMORY_IN_GBS }}
           OCI_SSH_PUBLIC_KEY: ${{ vars.OCI_SSH_PUBLIC_KEY }}
+          OCI_SUBNET_ID: ${{ vars.OCI_SUBNET_ID }}
+          OCI_IMAGE_ID: ${{ vars.OCI_IMAGE_ID }}
