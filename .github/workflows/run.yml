@@ -21,6 +21,11 @@ jobs:
       - name: Install Dependencies
         run: composer install
 
+      - name: Create Private Key File
+        run: |
+          echo "${{ secrets.OCI_PRIVATE_KEY }}" > oci_api_key.pem
+          chmod 600 oci_api_key.pem
+
       - name: Run Capacity Script
         run: php index.php
         env:
@@ -28,7 +33,7 @@ jobs:
           OCI_USER_ID: ${{ secrets.OCI_USER_ID }}
           OCI_TENANCY_ID: ${{ secrets.OCI_TENANCY_ID }}
           OCI_KEY_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
-          OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
+          OCI_PRIVATE_KEY: ./oci_api_key.pem
           OCI_BOOT_VOLUME_SIZE_IN_GBS: ${{ vars.OCI_BOOT_VOLUME_SIZE_IN_GBS }}
           OCI_MAX_INSTANCES: ${{ vars.OCI_MAX_INSTANCES }}
           OCI_SHAPE: ${{ vars.OCI_SHAPE }}
