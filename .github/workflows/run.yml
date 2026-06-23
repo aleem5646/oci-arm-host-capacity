@@ -2,6 +2,8 @@ name: OCI Arm Host Capacity
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
 
 jobs:
   run-script:
